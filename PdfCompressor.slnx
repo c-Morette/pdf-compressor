@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/PdfCompressor.App/PdfCompressor.App.csproj" />
+    <Project Path="src/PdfCompressor.Core/PdfCompressor.Core.csproj" />
+    <Project Path="src/PdfCompressor.Windows/PdfCompressor.Windows.csproj" />
+  </Folder>
+</Solution>

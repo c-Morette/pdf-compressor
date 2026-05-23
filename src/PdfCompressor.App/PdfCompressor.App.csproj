@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net472</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>PdfCompressor</AssemblyName>
+    <RootNamespace>PdfCompressor.App</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PdfCompressor.Core\PdfCompressor.Core.csproj" />
+    <ProjectReference Include="..\PdfCompressor.Windows\PdfCompressor.Windows.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,23 @@
+# Build e publish
+bin/
+obj/
+publish/
+
+# Instalador gerado
+installer/output/
+
+# Ghostscript (binários de terceiros — não versionar)
+vendor/ghostscript/
+!vendor/ghostscript/LEIA-ME.txt
+
+# .NET
+*.user
+*.suo
+.vs/
+*.nupkg
+
+# Claude Code (configurações locais do editor)
+.claude/
+
+# Logs locais
+*.log
