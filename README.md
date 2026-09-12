@@ -19,6 +19,7 @@ Utilitário leve para **comprimir arquivos PDF diretamente pelo menu de contexto
 - **Nunca sobrescreve** o arquivo original
 - Descarta o arquivo gerado se ele não for menor que o original
 - Notificação discreta ao final: sucesso com % de redução, sem redução, ou erro
+- **Janela de configurações** ao abrir o executável diretamente (permite escolher idioma, preset de compressão e gerenciar o menu de contexto)
 - Ghostscript **já incluso** no instalador — zero dependências externas
 
 ### Exemplo
@@ -43,33 +44,57 @@ Se `Contrato_compressed.pdf` já existir, o app gera `Contrato_compressed_1.pdf`
   - Já incluído no Windows 10/11. Para Windows 7 SP1, instale via Windows Update ou pelo link acima.
 
 **Desinstalar:** Painel de Controle → Programas → PDF Compressor → Desinstalar.
-O menu de contexto é removido automaticamente.
+O menu de contexto é removido automaticamente e a pasta de configurações (`%LOCALAPPDATA%\PdfCompressor`) é apagada.
 
 ---
 
 ## Como usar
 
+### Comprimir um PDF
 1. Clique com o botão direito em qualquer arquivo `.pdf` no Explorer
 2. Escolha **Comprimir PDF**
 3. Aguarde a notificação com o resultado
+
+O fluxo de compressão pelo menu de contexto roda silenciosamente em segundo plano, sem abrir nenhuma janela.
 
 Os logs ficam em:
 ```
 %LOCALAPPDATA%\PdfCompressor\logs\app.log
 ```
 
+### Janela de configurações
+Ao executar o `PdfCompressor.exe` sem argumentos (por exemplo, pelo Explorer em `C:\Program Files\PDFCompress\PdfCompressor.exe`), uma janela de configurações é exibida:
+
+- **Idioma**: **Automático (Windows)**, **Português (Brasil)** ou **English**.
+  - No modo **Automático** (padrão): sistemas com idioma `pt-*` usam Português; os demais adotam English.
+  - Trocar o idioma manualmente atualiza as notificações e o rótulo do menu do Explorer (regravado imediatamente se o menu estiver instalado).
+- **Preset de compressão**: define o preset utilizado nas próximas compressões (`screen`, `ebook` ou `printer`). Padrão: `ebook`.
+- **Status do menu de contexto**: exibe o estado atual (`Menu de contexto: instalado` ou `não instalado`), com botões para **Instalar / Atualizar** e **Remover**.
+- **Fechar**: fecha a janela.
+
+As configurações ficam salvas em:
+```
+%LOCALAPPDATA%\PdfCompressor\settings.json
+```
+No formato:
+```json
+{"language":"auto","qualityPreset":"ebook"}
+```
+Se o arquivo estiver ausente ou inválido, o aplicativo restaura automaticamente os padrões. A pasta inteira é apagada na desinstalação.
+
 ---
 
 ## Idioma
 
-O aplicativo seleciona automaticamente o idioma com base na interface do Windows:
-- **Português**: quando o idioma do sistema for `pt-*` (ex.: `pt-BR`, `pt-PT`).
-- **Inglês**: para todos os demais idiomas como padrão (*fallback*).
+O aplicativo detecta automaticamente o idioma da interface do Windows ou respeita a seleção feita na janela de configurações:
+- **Automático (Windows)**: seleciona **Português** quando o idioma do sistema for `pt-*` (ex.: `pt-BR`, `pt-PT`), e **Inglês** para todos os demais idiomas como padrão (*fallback*).
+- **Português (Brasil)**: fixa o idioma em português.
+- **English**: fixa o idioma em inglês.
 
 Essa configuração define o idioma dos textos em tempo de execução, incluindo notificações, mensagens de erro e o rótulo do menu de contexto (**Comprimir PDF** ou **Compress PDF**).
 
 > [!NOTE]
-> **Limitação do menu de contexto:** O rótulo do menu do Explorer é gravado no Registro no momento da instalação. Trocar o idioma do Windows posteriormente não atualiza automaticamente a entrada existente. Para regravar o menu no idioma atual do sistema, execute novamente:
+> O rótulo do menu do Explorer é gravado no Registro no momento da instalação. Ao trocar o idioma do Windows ou alterar a opção na janela de configurações, o rótulo do menu pode ser atualizado diretamente pela janela (ao trocar o idioma ou clicar no botão **Instalar / Atualizar**). Também é possível regravar via linha de comando:
 > ```cmd
 > PdfCompressor.exe --install-context-menu
 > ```
@@ -145,9 +170,14 @@ pdf-compressor/
 ├── src/
 │   ├── PdfCompressor.App/          # Ponto de entrada (WinExe, .NET FX 4.7.2)
 │   │   ├── Assets/app.ico          # Ícone do aplicativo
-│   │   └── Localization/           # Recursos e strings localizadas
+│   │   ├── Configuration/          # Gerenciamento de configurações (settings.json)
+│   │   ├── Localization/           # Recursos e strings localizadas
+│   │   └── UI/
+│   │       └── SettingsForm.cs     # Janela de configurações
 │   ├── PdfCompressor.Core/         # Lógica de compressão e validação
 │   └── PdfCompressor.Windows/      # Menu de contexto e notificações (P/Invoke)
+│       └── ContextMenu/
+│           └── ContextMenuStatus.cs # Verificação de status do menu de contexto
 ├── build/
 │   ├── publish-single.ps1          # Script de publicação (PowerShell)
 │   └── publish-single.cmd          # Script de publicação (CMD)
@@ -161,13 +191,15 @@ pdf-compressor/
 
 ## Presets de compressão
 
-O app usa o preset `ebook` do Ghostscript. Outros valores suportados internamente:
+O aplicativo permite escolher o nível de compressão através da janela de configurações. O preset padrão é o `ebook`. Os valores disponíveis são:
 
-| Preset    | Qualidade | Redução |
-|-----------|-----------|---------|
-| `screen`  | Baixa     | Máxima  |
-| `ebook`   | Média     | Boa (padrão) |
-| `printer` | Alta      | Menor   |
+| Preset    | Qualidade | Redução | Descrição |
+|-----------|-----------|---------|-----------|
+| `screen`  | Baixa     | Máxima  | Arquivo menor — qualidade baixa, maior compressão |
+| `ebook`   | Média     | Boa     | Equilibrado — boa qualidade e compressão balanceada (padrão) |
+| `printer` | Alta      | Menor   | Qualidade maior — qualidade de impressão, menor compressão |
+
+O preset selecionado é salvo nas configurações e utilizado nas próximas compressões feitas pelo menu de contexto.
 
 ---
 
