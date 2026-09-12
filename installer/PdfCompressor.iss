@@ -17,7 +17,7 @@
 ; ============================================================
 
 #define AppName       "PDF Compressor"
-#define AppVersion    "1.0.0"
+#define AppVersion    "1.0.1"
 #define AppPublisher  "PDFCompress"
 #define AppExeName    "PdfCompressor.exe"
 #define AppId         "E2B2CD85-F409-425E-8E10-8B9509A2F8A3"
