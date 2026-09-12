@@ -1,5 +1,7 @@
 # PDF Compressor
 
+🇧🇷 Português | [🇺🇸 English](README.en.md)
+
 Utilitário leve para **comprimir arquivos PDF diretamente pelo menu de contexto do Windows Explorer**, sem abrir nenhuma janela. Selecione um PDF, clique com o botão direito e escolha **Comprimir PDF** — o arquivo comprimido aparece na mesma pasta em segundos.
 
 ![Windows 7 SP1+](https://img.shields.io/badge/Windows-7%20SP1%20%7C%2010%20%7C%2011-0078D4?logo=windows)
@@ -55,6 +57,22 @@ Os logs ficam em:
 ```
 %LOCALAPPDATA%\PdfCompressor\logs\app.log
 ```
+
+---
+
+## Idioma
+
+O aplicativo seleciona automaticamente o idioma com base na interface do Windows:
+- **Português**: quando o idioma do sistema for `pt-*` (ex.: `pt-BR`, `pt-PT`).
+- **Inglês**: para todos os demais idiomas como padrão (*fallback*).
+
+Essa configuração define o idioma dos textos em tempo de execução, incluindo notificações, mensagens de erro e o rótulo do menu de contexto (**Comprimir PDF** ou **Compress PDF**).
+
+> [!NOTE]
+> **Limitação do menu de contexto:** O rótulo do menu do Explorer é gravado no Registro no momento da instalação. Trocar o idioma do Windows posteriormente não atualiza automaticamente a entrada existente. Para regravar o menu no idioma atual do sistema, execute novamente:
+> ```cmd
+> PdfCompressor.exe --install-context-menu
+> ```
 
 ---
 
@@ -126,6 +144,8 @@ Abra `installer\PdfCompressor.iss` no Inno Setup Compiler e clique em **Build**,
 pdf-compressor/
 ├── src/
 │   ├── PdfCompressor.App/          # Ponto de entrada (WinExe, .NET FX 4.7.2)
+│   │   ├── Assets/app.ico          # Ícone do aplicativo
+│   │   └── Localization/           # Recursos e strings localizadas
 │   ├── PdfCompressor.Core/         # Lógica de compressão e validação
 │   └── PdfCompressor.Windows/      # Menu de contexto e notificações (P/Invoke)
 ├── build/
