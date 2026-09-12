@@ -67,8 +67,9 @@ UninstallDisplayIcon={app}\{#AppExeName}
 PrivilegesRequired=admin
 
 [Languages]
-Name: "ptbr";    MessagesFile: "compiler:Languages\BrazilianPortuguese.isl"
+; O primeiro da lista é o padrão quando o idioma do Windows não casa com nenhum
 Name: "english"; MessagesFile: "compiler:Default.isl"
+Name: "ptbr";    MessagesFile: "compiler:Languages\BrazilianPortuguese.isl"
 
 ; ── Mensagens customizadas ──────────────────────────────────
 [CustomMessages]
