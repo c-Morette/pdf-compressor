@@ -30,4 +30,55 @@
   <data name="Error_UnknownOption" xml:space="preserve">
     <value>Opção desconhecida: {0}</value>
   </data>
+  <data name="Settings_LanguageLabel" xml:space="preserve">
+    <value>Idioma</value>
+  </data>
+  <data name="Language_Auto" xml:space="preserve">
+    <value>Automático (Windows)</value>
+  </data>
+  <data name="Language_PtBr" xml:space="preserve">
+    <value>Português (Brasil)</value>
+  </data>
+  <data name="Language_En" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="Settings_QualityLabel" xml:space="preserve">
+    <value>Preset de compressão</value>
+  </data>
+  <data name="Preset_Screen_Name" xml:space="preserve">
+    <value>Arquivo menor</value>
+  </data>
+  <data name="Preset_Screen_Description" xml:space="preserve">
+    <value>Qualidade baixa, compressão máxima (screen)</value>
+  </data>
+  <data name="Preset_Ebook_Name" xml:space="preserve">
+    <value>Equilibrado</value>
+  </data>
+  <data name="Preset_Ebook_Description" xml:space="preserve">
+    <value>Boa qualidade, boa compressão (ebook) — padrão</value>
+  </data>
+  <data name="Preset_Printer_Name" xml:space="preserve">
+    <value>Qualidade maior</value>
+  </data>
+  <data name="Preset_Printer_Description" xml:space="preserve">
+    <value>Qualidade de impressão, compressão mínima (printer)</value>
+  </data>
+  <data name="Settings_ContextMenuInstalled" xml:space="preserve">
+    <value>Menu de contexto: instalado</value>
+  </data>
+  <data name="Settings_ContextMenuNotInstalled" xml:space="preserve">
+    <value>Menu de contexto: não instalado</value>
+  </data>
+  <data name="Settings_InstallOrUpdate" xml:space="preserve">
+    <value>Instalar / Atualizar</value>
+  </data>
+  <data name="Settings_Remove" xml:space="preserve">
+    <value>Remover</value>
+  </data>
+  <data name="Settings_Close" xml:space="preserve">
+    <value>Fechar</value>
+  </data>
+  <data name="Settings_ContextMenuError" xml:space="preserve">
+    <value>Não foi possível atualizar o menu de contexto.&#xA;{0}</value>
+  </data>
 </root>
