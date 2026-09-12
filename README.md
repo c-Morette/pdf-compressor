@@ -63,7 +63,7 @@ Os logs ficam em:
 ```
 
 ### Janela de configurações
-Ao executar o `PdfCompressor.exe` sem argumentos (por exemplo, pelo Explorer em `C:\Program Files\PDFCompress\PdfCompressor.exe`), uma janela de configurações é exibida:
+Para abrir as configurações, procure **PDF Compressor** no Menu Iniciar (ou na lupa do Windows) — o instalador cria esse atalho. Também é possível executar o `PdfCompressor.exe` sem argumentos (ex.: `C:\Program Files\PDFCompress\PdfCompressor.exe`). A janela exibe:
 
 - **Idioma**: **Automático (Windows)**, **Português (Brasil)** ou **English**.
   - No modo **Automático** (padrão): sistemas com idioma `pt-*` usam Português; os demais adotam English.
@@ -85,6 +85,8 @@ Se o arquivo estiver ausente ou inválido, o aplicativo restaura automaticamente
 ---
 
 ## Idioma
+
+**Como trocar:** Menu Iniciar → **PDF Compressor** → campo **Idioma**. A troca é aplicada na hora, sem reiniciar.
 
 O aplicativo detecta automaticamente o idioma da interface do Windows ou respeita a seleção feita na janela de configurações:
 - **Automático (Windows)**: seleciona **Português** quando o idioma do sistema for `pt-*` (ex.: `pt-BR`, `pt-PT`), e **Inglês** para todos os demais idiomas como padrão (*fallback*).

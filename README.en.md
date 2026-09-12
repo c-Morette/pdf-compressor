@@ -63,7 +63,7 @@ Logs are stored at:
 ```
 
 ### Settings window
-When running `PdfCompressor.exe` without arguments (for example, via Explorer in `C:\Program Files\PDFCompress\PdfCompressor.exe`), a settings window is displayed:
+To open the settings, search for **PDF Compressor** in the Start Menu (or Windows Search) — the installer creates that shortcut. You can also run `PdfCompressor.exe` without arguments (e.g. `C:\Program Files\PDFCompress\PdfCompressor.exe`). The window shows:
 
 - **Language**: **Automatic (Windows)**, **Português (Brasil)**, or **English**.
   - In **Automatic** mode (default): systems with `pt-*` language use Portuguese; all others use English.
@@ -85,6 +85,8 @@ If the file is missing or invalid, the application automatically reverts to defa
 ---
 
 ## Language
+
+**How to change it:** Start Menu → **PDF Compressor** → **Language** field. The change applies immediately, no restart needed.
 
 The application automatically detects the Windows UI language or respects the option selected in the settings window:
 - **Automatic (Windows)**: selects **Portuguese** when the system language is `pt-*` (e.g., `pt-BR`, `pt-PT`), and **English** for all other languages as the default (*fallback*).

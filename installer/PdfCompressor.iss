@@ -58,7 +58,6 @@ ArchitecturesInstallIn64BitMode=x64
 ; Windows 7 SP1 mínimo (NT 6.1 build 7601)
 MinVersion=6.1.7601
 
-; Não criar atalho em Start Menu Group (app sem janela própria)
 CreateUninstallRegKey=yes
 UninstallDisplayName={#AppName}
 UninstallDisplayIcon={app}\{#AppExeName}
@@ -82,6 +81,9 @@ english.ContextMenuSuccess=Context menu registered successfully.
 ptbr.ContextMenuStatus=Registrando menu de contexto...
 english.ContextMenuStatus=Registering context menu...
 
+ptbr.ShortcutComment=Configurações do PDF Compressor (idioma, preset, menu de contexto)
+english.ShortcutComment=PDF Compressor settings (language, preset, context menu)
+
 ; ── Arquivos ───────────────────────────────────────────────
 [Files]
 ; Binários do aplicativo
@@ -97,6 +99,10 @@ Source: "{#GhostscriptDir}\bin\*";          DestDir: "{app}\gs\bin";          Fl
 Source: "{#GhostscriptDir}\lib\*";          DestDir: "{app}\gs\lib";          Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "{#GhostscriptDir}\Resource\*";     DestDir: "{app}\gs\Resource";     Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "{#GhostscriptDir}\iccprofiles\*";  DestDir: "{app}\gs\iccprofiles";  Flags: ignoreversion recursesubdirs createallsubdirs
+
+[Icons]
+; Atalho no Menu Iniciar: sem ele a busca do Windows não encontra o app para abrir as configurações
+Name: "{autoprograms}\{#AppName}"; Filename: "{app}\{#AppExeName}"; Comment: "{cm:ShortcutComment}"
 
 ; ── Executar após instalar ─────────────────────────────────
 [Run]
