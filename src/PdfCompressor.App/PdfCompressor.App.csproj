@@ -6,10 +6,17 @@
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UseWindowsForms>true</UseWindowsForms>
     <AssemblyName>PdfCompressor</AssemblyName>
     <RootNamespace>PdfCompressor.App</RootNamespace>
     <ApplicationIcon>Assets\app.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Version>1.0.1</Version>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Web.Extensions" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\PdfCompressor.Core\PdfCompressor.Core.csproj" />

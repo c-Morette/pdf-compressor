@@ -1,16 +1,24 @@
 using System.Globalization;
 using System.Threading;
+using PdfCompressor.App.Configuration;
 
 namespace PdfCompressor.App.Localization;
 
 internal static class AppCulture
 {
-    public static void Apply()
+    // Cultura do Windows capturada antes de qualquer override, para "auto" continuar correto após trocas.
+    private static readonly CultureInfo WindowsCulture = CultureInfo.CurrentUICulture;
+
+    public static void Apply(string language)
     {
-        var currentCulture = CultureInfo.CurrentUICulture;
-        var appCulture = currentCulture.TwoLetterISOLanguageName == "pt"
-            ? CultureInfo.GetCultureInfo("pt-BR")
-            : CultureInfo.GetCultureInfo("en-US");
+        var appCulture = language switch
+        {
+            AppSettings.LanguagePtBr => CultureInfo.GetCultureInfo("pt-BR"),
+            AppSettings.LanguageEn => CultureInfo.GetCultureInfo("en-US"),
+            _ => WindowsCulture.TwoLetterISOLanguageName == "pt"
+                ? CultureInfo.GetCultureInfo("pt-BR")
+                : CultureInfo.GetCultureInfo("en-US"),
+        };
 
         Thread.CurrentThread.CurrentUICulture = appCulture;
         CultureInfo.DefaultThreadCurrentUICulture = appCulture;

@@ -1,9 +1,12 @@
 using System.Diagnostics;
 using System.Globalization;
+using System.Windows.Forms;
+using PdfCompressor.App.Configuration;
 using PdfCompressor.Core.Compression;
 using PdfCompressor.Core.Logging;
 using PdfCompressor.Core.Validation;
 using PdfCompressor.App.Localization;
+using PdfCompressor.App.UI;
 using PdfCompressor.Windows.ContextMenu;
 using PdfCompressor.Windows.Notifications;
 
@@ -14,15 +17,13 @@ internal static class Program
     [STAThread]
     private static int Main(string[] args)
     {
-        AppCulture.Apply();
+        var settings = AppSettingsStore.Load();
+        AppCulture.Apply(settings.Language);
 
         try
         {
             if (args.Length == 0)
-            {
-                AppLogger.Info("Nenhum argumento fornecido. Encerrando silenciosamente.");
-                return 0;
-            }
+                return ShowSettings(settings);
 
             var firstArg = args[0];
 
@@ -38,7 +39,7 @@ internal static class Program
                     if (firstArg.StartsWith("--", StringComparison.Ordinal))
                         return HandleUnknownOption(firstArg);
 
-                    return CompressFile(firstArg);
+                    return CompressFile(firstArg, settings);
             }
         }
         catch (Exception ex)
@@ -47,6 +48,14 @@ internal static class Program
             WindowsNotifier.ShowError(Strings.App_Title, Strings.Notification_Error);
             return 1;
         }
+    }
+
+    private static int ShowSettings(AppSettings settings)
+    {
+        Application.EnableVisualStyles();
+        Application.SetCompatibleTextRenderingDefault(false);
+        Application.Run(new SettingsForm(settings, GetExecutablePath()));
+        return 0;
     }
 
     private static int InstallContextMenu()
@@ -62,7 +71,7 @@ internal static class Program
         return 0;
     }
 
-    private static int CompressFile(string path)
+    private static int CompressFile(string path, AppSettings settings)
     {
         var validation = PdfValidator.Validate(path);
         if (!validation.IsValid)
@@ -73,7 +82,7 @@ internal static class Program
         }
 
         var service = new PdfCompressionService();
-        var options = new PdfCompressionOptions { QualityPreset = "ebook" };
+        var options = new PdfCompressionOptions { QualityPreset = settings.QualityPreset };
         var result = service.Compress(path, options);
 
         if (!result.Success)
