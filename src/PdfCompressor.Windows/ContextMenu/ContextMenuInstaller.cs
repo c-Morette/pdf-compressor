@@ -9,17 +9,18 @@ public static class ContextMenuInstaller
     internal const string ShellKeyPath =
         @"Software\Classes\SystemFileAssociations\.pdf\shell\CompressPdf";
 
-    private const string MenuText = "Comprimir PDF";
-
-    public static void Install(string executablePath)
+    public static void Install(string executablePath, string menuText)
     {
         if (string.IsNullOrWhiteSpace(executablePath) || !File.Exists(executablePath))
             throw new FileNotFoundException("Executável não encontrado para registrar o menu.", executablePath);
 
+        if (string.IsNullOrWhiteSpace(menuText))
+            throw new ArgumentException("O texto do menu não pode estar vazio.", nameof(menuText));
+
         using var shellKey = Registry.CurrentUser.CreateSubKey(ShellKeyPath, writable: true)
             ?? throw new InvalidOperationException("Não foi possível criar a chave de registro.");
 
-        shellKey.SetValue(null, MenuText, RegistryValueKind.String);
+        shellKey.SetValue(null, menuText, RegistryValueKind.String);
         shellKey.SetValue("Icon", $"\"{executablePath}\"", RegistryValueKind.String);
 
         using var commandKey = shellKey.CreateSubKey("command", writable: true)

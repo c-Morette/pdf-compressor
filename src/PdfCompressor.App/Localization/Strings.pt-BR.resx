@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="App_Title" xml:space="preserve">
+    <value>PDF Compressor</value>
+  </data>
+  <data name="Notification_Success" xml:space="preserve">
+    <value>PDF comprimido com sucesso.&#xA;Redução: {0}%</value>
+  </data>
+  <data name="Notification_NotReduced" xml:space="preserve">
+    <value>O PDF já parece estar otimizado.&#xA;Nenhum novo arquivo foi mantido.</value>
+  </data>
+  <data name="Notification_Error" xml:space="preserve">
+    <value>Não foi possível comprimir o PDF.</value>
+  </data>
+  <data name="ContextMenu_CompressPdf" xml:space="preserve">
+    <value>Comprimir PDF</value>
+  </data>
+  <data name="Error_UnknownOption" xml:space="preserve">
+    <value>Opção desconhecida: {0}</value>
+  </data>
+</root>

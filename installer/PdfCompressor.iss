@@ -49,6 +49,7 @@ SolidCompression=yes
 
 ; Visual
 WizardStyle=modern
+SetupIconFile=..\src\PdfCompressor.App\Assets\app.ico
 
 ; Somente x64
 ArchitecturesAllowed=x64
@@ -77,6 +78,9 @@ english.DotNetMissing=This application requires .NET Framework 4.7.2 or higher.%
 ptbr.ContextMenuSuccess=Menu de contexto registrado com sucesso.
 english.ContextMenuSuccess=Context menu registered successfully.
 
+ptbr.ContextMenuStatus=Registrando menu de contexto...
+english.ContextMenuStatus=Registering context menu...
+
 ; ── Arquivos ───────────────────────────────────────────────
 [Files]
 ; Binários do aplicativo
@@ -94,7 +98,7 @@ Source: "{#GhostscriptDir}\iccprofiles\*";  DestDir: "{app}\gs\iccprofiles";  Fl
 ; ── Executar após instalar ─────────────────────────────────
 [Run]
 ; Registra o menu de contexto para o usuário atual (HKCU — sem elevação necessária)
-Filename: "{app}\{#AppExeName}"; Parameters: "--install-context-menu"; Flags: runhidden; StatusMsg: "Registrando menu de contexto..."
+Filename: "{app}\{#AppExeName}"; Parameters: "--install-context-menu"; Flags: runhidden; StatusMsg: "{cm:ContextMenuStatus}"
 
 ; ── Executar antes de desinstalar ─────────────────────────
 [UninstallRun]
