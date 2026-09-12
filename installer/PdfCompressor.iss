@@ -88,6 +88,8 @@ Source: "{#BuildDir}\{#AppExeName}";            DestDir: "{app}"; Flags: ignorev
 Source: "{#BuildDir}\{#AppExeName}.config";     DestDir: "{app}"; Flags: ignoreversion
 Source: "{#BuildDir}\PdfCompressor.Core.dll";   DestDir: "{app}"; Flags: ignoreversion
 Source: "{#BuildDir}\PdfCompressor.Windows.dll"; DestDir: "{app}"; Flags: ignoreversion
+; Recursos localizados (pt-BR) — sem isto o app cai para inglês em Windows PT
+Source: "{#BuildDir}\pt-BR\PdfCompressor.resources.dll"; DestDir: "{app}\pt-BR"; Flags: ignoreversion
 
 ; Ghostscript bundled — copiado para {app}\gs\
 Source: "{#GhostscriptDir}\bin\*";          DestDir: "{app}\gs\bin";          Flags: ignoreversion recursesubdirs createallsubdirs
