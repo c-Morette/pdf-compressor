@@ -1,4 +1,4 @@
-using System.Drawing;
+﻿using System.Drawing;
 using System.Globalization;
 using System.Reflection;
 using System.Windows.Forms;
@@ -264,7 +264,8 @@ internal sealed class SettingsForm : Form
         }
         catch (Exception ex)
         {
-            ShowContextMenuError(ex);
+            AppLogger.Error("Falha ao remover o menu de contexto.", ex);
+            ShowContextMenuError();
         }
 
         RefreshContextMenuStatus();
@@ -279,7 +280,7 @@ internal sealed class SettingsForm : Form
         catch (Exception ex)
         {
             AppLogger.Error("Falha ao instalar/atualizar o menu de contexto.", ex);
-            ShowContextMenuError(ex);
+            ShowContextMenuError();
         }
     }
 
@@ -295,9 +296,7 @@ internal sealed class SettingsForm : Form
         }
     }
 
-    private void ShowContextMenuError(Exception ex)
-    {
-        var message = string.Format(CultureInfo.CurrentUICulture, Strings.Settings_ContextMenuError, ex.Message);
-        MessageBox.Show(this, message, Strings.App_Title, MessageBoxButtons.OK, MessageBoxIcon.Error);
-    }
+    // Detalhe técnico fica no log; a UI mostra só a mensagem localizada.
+    private void ShowContextMenuError() =>
+        MessageBox.Show(this, Strings.Settings_ContextMenuError, Strings.App_Title, MessageBoxButtons.OK, MessageBoxIcon.Error);
 }
