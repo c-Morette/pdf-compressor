@@ -21,3 +21,6 @@ vendor/ghostscript/
 
 # Logs locais
 *.log
+
+# Docs do projeto
+docs/Analista
